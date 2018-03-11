@@ -1,0 +1,6 @@
+#!/bin/sh
+make clean
+suite="--suite OCRA-1:HOTP-SHA1-6:C-QN08-PSHA1"
+[ -n "$1" ] && secret="--card_secret $1"
+mirage configure -t xen $suite $secret && \
+make && ../qubes-test-mirage/test-mirage ocra.xen mirage-test
