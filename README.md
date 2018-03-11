@@ -6,8 +6,9 @@
   suite as implemented in [OTP.to cards](https://otp.to/)
 
 - Since that library depended on the `Unix` module which is not available in Mirage,
-  you probably need to pin [my branch](https://github.com/cfcs/ocaml-rfc6287):
-  `opam pin add rfc6287 -k git 'https://github.com/cfcs/ocaml-rfc6287#mirage'`
+  you probably need to pin [this branch](https://github.com/hannesm/ocaml-rfc6287/tree/fixes):
+  `opam pin add rfc6287 -k git 'https://github.com/hannesm/ocaml-rfc6287#fixes'`
+  (see [the PR](https://github.com/sg2342/ocaml-rfc6287/pull/12))
 
 - It is probably a bit tricky to install since it uses the unpackaged
   [mirage-framebuffer](https://github.com/cfcs/mirage-framebuffer) library.
