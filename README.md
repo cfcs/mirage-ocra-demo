@@ -1,4 +1,4 @@
-# Mirage OCRA
+# Mirage OCRA ![Build status](https://travis-ci.org/cfcs/mirage-ocra-demo.svg?branch=master)
 
 - This is a sample QubesOS unikernel using
   https://github.com/sg2342/ocaml-rfc6287 to
