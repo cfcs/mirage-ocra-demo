@@ -1,6 +1,6 @@
 env:
   global:
-    - PINS="usane:https://github.com/hannesm/usane.git cs:https://github.com/cfcs/ocaml-cs.git mirage:https://github.com/cfcs/mirage#fix_qubes mirage-xen:https://github.com/cfcs/mirage-platform#virt_to_mfn mirage-qubes:https://github.com/cfcs/mirage-qubes#guid_mvar mirage-framebuffer-tsdl:https://github.com/cfcs/mirage-framebuffer.git mirage-framebuffer-qubes:https://github.com/cfcs/mirage-framebuffer.git rfc6287:https://github.com/hannesm/ocaml-rfc6287#fixes"
+    - PINS="usane:https://github.com/hannesm/usane.git cs:https://github.com/cfcs/ocaml-cs.git mirage:https://github.com/cfcs/mirage.git#fix_qubes mirage-xen:https://github.com/cfcs/mirage-platform.git#virt_to_mfn mirage-qubes:https://github.com/cfcs/mirage-qubes.git#guid_mvar mirage-framebuffer-tsdl:https://github.com/cfcs/mirage-framebuffer.git mirage-framebuffer-qubes:https://github.com/cfcs/mirage-framebuffer.git rfc6287:https://github.com/hannesm/ocaml-rfc6287.git#fixes"
     - PACKAGE="mirage-ocra-demo"
     - FLAGS="--suite OCRA-1:HOTP-SHA1-6:C-QN08-PSHA1 --card_secret bb3508569b89cdbabb7e5bea39cf09162dfe9c91"
 

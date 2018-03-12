@@ -57,7 +57,8 @@ struct
               display "" >>= fun () -> (* print newline *)
               begin match Rfc6287.verify ~c:!counter ~p:pin
                             ~q:challenge ~cw:counter_window
-                            ~key:(Key_gen.card_secret () |> Cstruct.of_hex)
+                            ~key:(Key_gen.card_secret () |> Cs.of_cstruct
+                                  |> Cs.of_hex |> R.get_ok |> Cs.to_cstruct)
                             (* line is the card's output: *)
                             ~a:(Cstruct.of_string line) suite with
               | Ok (true, Some next_counter) ->

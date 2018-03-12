@@ -76,6 +76,7 @@ let main =
     ~packages:[
       package "nocrypto" ;
       package "cstruct";
+      package "cs";
       package "rfc6287";
       package "mirage-logs";
     ] "Unikernel.Main" (time @-> job)
