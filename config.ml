@@ -27,19 +27,19 @@ let config_framebuffer =
       Key.eval (Info.context mirage_info) @@
       Key.match_ Key.(value target) @@ begin function
         | `Unix | `MacOSX ->
-            {| Lwt.return (fun () ->
-                 let b =
+            {| Lwt.return (
+                 let fb =
                    let module X = Framebuffer.Make(Framebuffer_tsdl) in
                    X.init ()
                  in
-                 Lwt.return ((), b))
+                 Lwt.return ((), fb))
             |}
         | `Xen ->
-            {| Lwt.return (fun () ->
+            {| Lwt.return (
                  Qubes.RExec.connect ~domid:0 () >>= fun qrexec ->
                  Qubes.GUI.connect ~domid:0 () >>= fun gui ->
 
-                 let b =
+                 let fb =
                    let module X = Framebuffer.Make(Framebuffer_qubes) in
                    X.init gui
                  in
@@ -50,7 +50,7 @@ let config_framebuffer =
                    Qubes.RExec.disconnect qrexec
                  );
 
-                 Lwt.return (((1), qrexec, gui),b))
+                 Lwt.return ((12345, qrexec, gui),fb) )
             |}
         | `Virtio | `Ukvm ->
           failwith "Mirage_Framebuffer is not implemented for Virtio | Uvkm"
@@ -77,7 +77,7 @@ let main =
       package "nocrypto" ;
       package "cstruct";
       package "cs";
-      package "rfc6287";
+      package ~min:"1.0.3" "rfc6287";
       package "mirage-logs";
     ] "Unikernel.Main" (time @-> job)
 

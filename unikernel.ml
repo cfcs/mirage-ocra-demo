@@ -57,8 +57,8 @@ struct
               display "" >>= fun () -> (* print newline *)
               begin match Rfc6287.verify ~c:!counter ~p:pin
                             ~q:challenge ~cw:counter_window
-                            ~key:(Key_gen.card_secret () |> Cs.of_cstruct
-                                  |> Cs.of_hex |> R.get_ok |> Cs.to_cstruct)
+                            ~key:Hex.(Key_gen.card_secret () (* hex decode: *)
+                                      |> of_string |> to_cstruct)
                             (* line is the card's output: *)
                             ~a:(Cstruct.of_string line) suite with
               | Ok (true, Some next_counter) ->
@@ -97,7 +97,7 @@ struct
     FB.output_tty fb (FB.term_size fb) @@ "Welcome to OCRA!\n" >>= fun () ->
     FB.output_tty fb (FB.term_size fb)
       ("Card suite: " ^ suite ^"\n") >>= fun () ->
-    begin match Key_gen.card_secret () |> Cstruct.of_hex with
+    begin match Key_gen.card_secret () |> Hex.of_string with
       | exception _ ->
         FB.output_tty fb (FB.term_size fb)
           "Error: Card secret must be a valid hex string \
@@ -122,8 +122,8 @@ struct
 end
 
   let start _time
-      (fb_init: unit -> ('a * (module Framebuffer.S) Lwt.t) Lwt.t) () =
-  fb_init () >>= fun (_platform_specific, fb_promise) ->
+      (fb_init: ('a * (module Framebuffer.S) Lwt.t) Lwt.t) () =
+  fb_init >>= fun (_platform_specific, fb_promise) ->
   fb_promise >>= fun fb_module ->
   let module FB : Framebuffer.S = (val (fb_module) : Framebuffer.S) in
   let module App = Ocra(FB) in

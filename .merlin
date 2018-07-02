@@ -5,6 +5,7 @@ PKG rfc6287
 
 PKG mirage-framebuffer
 
+PKG hex
 PKG cstruct
 PKG mirage
 PKG mirage-qubes
