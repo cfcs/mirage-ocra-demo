@@ -19,7 +19,7 @@ let config_framebuffer =
                  package "mirage-framebuffer-qubes"]
       | `Unix | `MacOSX ->
          [package "mirage-unix"; package "mirage-framebuffer-tsdl"]
-      | `Qubes | `Ukvm | `Virtio -> []
+      | `Qubes | `Hvt | `Virtio -> []
       end)
     |> Mirage.Key.map (List.cons (package "mirage-framebuffer"))
     method! deps = []
@@ -52,8 +52,8 @@ let config_framebuffer =
 
                  Lwt.return ((12345, qrexec, gui),fb) )
             |}
-        | `Virtio | `Ukvm ->
-          failwith "Mirage_Framebuffer is not implemented for Virtio | Uvkm"
+        | `Virtio | `Hvt ->
+          failwith "Mirage_Framebuffer is not implemented for Virtio | Hvt"
         | `Qubes ->
           failwith "Mirage_framebuffer must be used with -t xen for Qubes"
       end
